@@ -26,4 +26,48 @@ public class DroneManager {
         drone.setMaxAltitude(MAXINDOORHEIGHT);
         drone.start();
     }
+
+    public static void goTo(String s) {
+    }
+
+    public static void takeOff() {
+    }
+
+    public static void land() {
+    }
+
+    public static void forward(String s) {
+    }
+
+    public static void back(String s) {
+    }
+
+    public static void left(String s) {
+    }
+
+    public static void right(String s) {
+    }
+
+    public static void up(String s) {
+    }
+
+    public static void down(String s) {
+    }
+
+    public static void turnCounterClockwise(String s) {
+    }
+
+    public static void turnClockwise(String s) {
+    }
+
+    public static void emergency() {
+    }
+
+    public static void reset() {
+    }
+
+    public static void trackRotation() {
+    }
+
+
 }
