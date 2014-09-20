@@ -31,9 +31,14 @@ public class DroneManager {
     }
 
     public static void takeOff() {
+                preflightChecklist();
+
+                drone.getCommandManager().takeOff();
     }
 
     public static void land() {
+                drone.getCommandManager().landing();
+
     }
 
     public static void forward(String s) {
