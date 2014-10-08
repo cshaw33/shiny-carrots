@@ -30,11 +30,13 @@ public class TestActivity extends Activity {
     }
 
     private void initialize() throws Exception {
-
+        DroneManager d = new DroneManager();
+        d.initializeDrone();
         FIDOTestApp app = (FIDOTestApp)getApplication();
 
         System.out.println("Starting SMS Test!");
         testSMS();
+
 
     }
 
