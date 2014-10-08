@@ -1,4 +1,4 @@
-package edu.gatech.fido.App.Tester;
+package edu.gatech.fido;
 
 import android.hardware.*;
 import android.content.*;
