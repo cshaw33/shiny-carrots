@@ -35,7 +35,7 @@ public class SMSManager extends BroadcastReceiver {
 
         String[] splitmessage = message.split(" ");
         String command = splitmessage[0];
-        /*switch (command) {
+        switch (command) {
             case GOTOGPS:
                 DroneManager.goTo(splitmessage[1]);
                 break;
@@ -81,7 +81,7 @@ public class SMSManager extends BroadcastReceiver {
             case TRACKROTATION:
                 DroneManager.trackRotation();
                 break;
-        }*/
+        }
     }
 
     private boolean isParrotMessage(String message) {
