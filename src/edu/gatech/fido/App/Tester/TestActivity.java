@@ -17,7 +17,7 @@ public class TestActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        GPS.testLocation((LocationManager) this.getSystemService(Context.LOCATION_SERVICE));
+        GPS.Initialize((LocationManager) this.getSystemService(Context.LOCATION_SERVICE));
         WifiManager wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         System.out.println(("\nConnected to " + wifi.getConnectionInfo().getSSID()));
         SMSManager sms = new SMSManager();

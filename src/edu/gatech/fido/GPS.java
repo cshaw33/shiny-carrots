@@ -1,6 +1,8 @@
 package edu.gatech.fido;
 
-import android.location.Criteria;
+import java.util.Arrays;
+import java.util.List;
+
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -10,50 +12,65 @@ import android.os.Bundle;
  */
 public class GPS
 {
-    public static void testLocation(LocationManager locationManager)
-    {
-        System.out.println("asdf");
-        // Define a listener that responds to location updates
-        LocationListener locationListener = new LocationListener() {
-            public void onLocationChanged(Location location) {
-                System.out.println("Hello");
-                // Called when a new location is found by the network location provider.
-                makeUseOfNewLocation(location);
-            }
+	private static Location dogLocation;
+	private static final double MIN_BEARING_CORRECTION = 1.0;
+	private static final double MIN_DISTANCE_CORRECTION = 1.0;
+	private static final double MIN_DISTANCE_PRECISION = 10.0;
+	public static void Initialize(LocationManager locationManager)
+	{
+		dogLocation = new Location("dogVest");
+		// Define a listener that responds to location updates
+		LocationListener locationListener = new LocationListener() {
+		    public void onLocationChanged(Location location) {
+		      // Called when a new location is found by the network location provider.
+		      makeUseOfNewLocation(location);
+		    }
+	
+		    public void onStatusChanged(String provider, int status, Bundle extras) {
+				System.out.println("asdf1");}
+	
+		    public void onProviderEnabled(String provider) {
+				System.out.println("asdf2");}
+	
+		    public void onProviderDisabled(String provider) {
+				System.out.println("asdf3");}
+		  };
+		  // Register the listener with the Location Manager to receive location updates
+		  locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+	}
 
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-                System.out.println("asdf1");}
+	public static void setDestination(String text)
+	{
+		String[] locationCordinates = text.split(",");
+		dogLocation.setLatitude(Location.convert(locationCordinates[0]));
+		dogLocation.setLongitude(Location.convert(locationCordinates[1]));
+	}
+	public static void makeUseOfNewLocation(Location droneLocation)
+	{
+		if (droneLocation.getAccuracy() < MIN_DISTANCE_PRECISION)
+		{
+			float distanceRemaining = (droneLocation.distanceTo(dogLocation));
+			if (distanceRemaining < MIN_DISTANCE_CORRECTION || distanceRemaining < 2 * droneLocation.getAccuracy())
+			{
+				// TODO stop drone
+				System.out.println("arrived at Destination");
+			} else {
+				if (droneLocation.hasBearing())
+				{
+					double currentBearing = droneLocation.getBearing();
+					double desiredBearing = droneLocation.bearingTo(dogLocation);
+					double bearingDifference = currentBearing - desiredBearing;
+					if (Math.abs(bearingDifference) > MIN_BEARING_CORRECTION)
+					{
+						// TODO tell drone to correct bearing, and start drone if not started already
+					}
+				}
+			}
+		} else {
 
-            public void onProviderEnabled(String provider) {
-                System.out.println("asdf2");}
-
-            public void onProviderDisabled(String provider) {
-                System.out.println("asdf3");}
-        };
-        Criteria criteria = new Criteria();
-        // Register the listener with the Location Manager to receive location updates
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-        String provider = locationManager.getBestProvider(criteria, false);
-
-        if(provider!=null && !provider.equals("")){
-
-            // Get the location from the given provider
-            Location location = locationManager.getLastKnownLocation(provider);
-
-            locationManager.requestLocationUpdates(provider, 20000, 1,locationListener);
-
-            if(location!=null)
-                locationListener.onLocationChanged(location);
-            else
-                System.out.println("No location");
-        }else{
-            System.out.println("No provider");
-        }
-    }
-
-    public static void makeUseOfNewLocation(Location location)
-    {
-        System.out.println("found location");
-        System.out.println(location.toString());
-    }
+			System.out.println("Location not precise enough, waiting for better location");
+		}
+		System.out.println("found location");
+		System.out.println(droneLocation.toString());
+	}
 }
