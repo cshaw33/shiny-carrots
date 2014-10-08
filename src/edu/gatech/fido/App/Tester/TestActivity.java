@@ -6,7 +6,7 @@ import android.location.LocationManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.telephony.SmsManager;
-import edu.gatech.fido.GPS;
+import edu.gatech.fido.GPSManager;
 import edu.gatech.fido.SMSManager;
 
 /**
@@ -17,7 +17,7 @@ public class TestActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        GPS.Initialize((LocationManager) this.getSystemService(Context.LOCATION_SERVICE));
+        GPSManager.Initialize((LocationManager) this.getSystemService(Context.LOCATION_SERVICE));
         WifiManager wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         System.out.println(("\nConnected to " + wifi.getConnectionInfo().getSSID()));
         SMSManager sms = new SMSManager();

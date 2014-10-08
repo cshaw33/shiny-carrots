@@ -3,6 +3,7 @@ package edu.gatech.fido;
 import java.util.Arrays;
 import java.util.List;
 
+import edu.gatech.fido.Constants.GPS;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -10,12 +11,9 @@ import android.os.Bundle;
 /**
  * Created by automation on 9/15/14.
  */
-public class GPS
+public class GPSManager
 {
 	private static Location dogLocation;
-	private static final double MIN_BEARING_CORRECTION = 1.0;
-	private static final double MIN_DISTANCE_CORRECTION = 1.0;
-	private static final double MIN_DISTANCE_PRECISION = 10.0;
 	public static void Initialize(LocationManager locationManager)
 	{
 		dogLocation = new Location("dogVest");
@@ -47,12 +45,13 @@ public class GPS
 	}
 	public static void makeUseOfNewLocation(Location droneLocation)
 	{
-		if (droneLocation.getAccuracy() < MIN_DISTANCE_PRECISION)
+		if (droneLocation.getAccuracy() < GPS.MIN_DISTANCE_PRECISION)
 		{
 			float distanceRemaining = (droneLocation.distanceTo(dogLocation));
-			if (distanceRemaining < MIN_DISTANCE_CORRECTION || distanceRemaining < 2 * droneLocation.getAccuracy())
+			if (distanceRemaining < GPS.MIN_DISTANCE_CORRECTION || distanceRemaining < 2 * droneLocation.getAccuracy())
 			{
 				// TODO stop drone
+				//DroneManager.Land();
 				System.out.println("arrived at Destination");
 			} else {
 				if (droneLocation.hasBearing())
@@ -60,7 +59,7 @@ public class GPS
 					double currentBearing = droneLocation.getBearing();
 					double desiredBearing = droneLocation.bearingTo(dogLocation);
 					double bearingDifference = currentBearing - desiredBearing;
-					if (Math.abs(bearingDifference) > MIN_BEARING_CORRECTION)
+					if (Math.abs(bearingDifference) > GPS.MIN_BEARING_CORRECTION)
 					{
 						// TODO tell drone to correct bearing, and start drone if not started already
 					}

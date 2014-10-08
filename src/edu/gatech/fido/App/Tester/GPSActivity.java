@@ -1,6 +1,6 @@
 package edu.gatech.fido.App.Tester;
 
-import edu.gatech.fido.GPS;
+import edu.gatech.fido.GPSManager;
 import android.app.Activity;
 import android.content.Context;
 import android.location.LocationManager;
@@ -14,7 +14,7 @@ public class GPSActivity extends Activity {
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        GPS.Initialize((LocationManager) this.getSystemService(Context.LOCATION_SERVICE));
+        GPSManager.Initialize((LocationManager) this.getSystemService(Context.LOCATION_SERVICE));
         initialize();
     }
 

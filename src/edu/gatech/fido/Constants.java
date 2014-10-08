@@ -27,5 +27,10 @@ public class Constants {
         public static final String PREFLIGHT = "preflight";
         public static final String TRACKROTATION = "track rotation";
     }
+    public class GPS {
+    	public static final double MIN_BEARING_CORRECTION = 1.0;
+    	public static final double MIN_DISTANCE_CORRECTION = 1.0;
+    	public static final double MIN_DISTANCE_PRECISION = 10.0;
+    }
 
 }
