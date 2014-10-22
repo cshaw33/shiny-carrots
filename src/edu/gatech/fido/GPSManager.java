@@ -74,12 +74,12 @@ public class GPSManager
 
                     if(desiredDegree < 0){
                         System.out.println("Turn right!");
-                        //   DroneManager.turnClockwise(String.valueOf(curDegree-lastDegree));
+                        DroneManager.turnClockwise(String.valueOf(Math.min(Math.abs(desiredDegree),100)));
                     }
                     else if(desiredDegree > 0)
                     {
                         System.out.println("Turn left!");
-                        //   DroneManager.turnCounterClockwise(String.valueOf(lastDegree-curDegree));
+                        DroneManager.turnCounterClockwise(String.valueOf(Math.min(Math.abs(desiredDegree),100)));
                     }
                //     double bearingDifference = currentBearing - desiredBearing;
                //     if (Math.abs(bearingDifference) > GPS.MIN_BEARING_CORRECTION)
