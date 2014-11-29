@@ -43,31 +43,30 @@ public class SMSManager extends BroadcastReceiver {
                 DroneManager.takeOff();
                 break;
             case LAND:
-                DroneManager.land();
-                break;
+                    DroneManager.land();
             case GOFORWARD:
-                DroneManager.forward(splitmessage[1]);
+                DroneManager.forward(Integer.parseInt(splitmessage[1]));
                 break;
             case GOBACK:
-                DroneManager.back(splitmessage[1]);
+                DroneManager.back(Integer.parseInt(splitmessage[1]));
                 break;
             case GOLEFT:
-                DroneManager.left(splitmessage[1]);
+                DroneManager.left(Integer.parseInt(splitmessage[1]));
                 break;
             case GORIGHT:
-                DroneManager.right(splitmessage[1]);
+                DroneManager.right(Integer.parseInt(splitmessage[1]));
                 break;
             case GOUP:
-                DroneManager.up(splitmessage[1]);
+                DroneManager.up(Integer.parseInt(splitmessage[1]));
                 break;
             case GODOWN:
-                DroneManager.down(splitmessage[1]);
+                DroneManager.down(Integer.parseInt(splitmessage[1]));
                 break;
             case TURNLEFT:
-                DroneManager.turnCounterClockwise(splitmessage[1]);
+                DroneManager.turnCounterClockwise(Integer.parseInt(splitmessage[1]));
                 break;
             case TURNRIGHT:
-                DroneManager.turnClockwise(splitmessage[1]);
+                DroneManager.turnClockwise(Integer.parseInt(splitmessage[1]));
                 break;
             case EMERGENCY:
                 DroneManager.emergency();
@@ -77,9 +76,6 @@ public class SMSManager extends BroadcastReceiver {
                 break;
             case PREFLIGHT:
                 DroneManager.preflightChecklist();
-                break;
-            case TRACKROTATION:
-                DroneManager.trackRotation();
                 break;
         }
     }
