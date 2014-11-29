@@ -48,9 +48,6 @@ On your normal cell phone, text the android phone "Drone takeoff" and then "Dron
 
 
 GOALS:
-Finish up the drone goto commands
-
-Add in extra drone management commands for emergency purposes
 
 Create an android app for the second user.
 
