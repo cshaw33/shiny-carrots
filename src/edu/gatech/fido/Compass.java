@@ -39,6 +39,54 @@ public class Compass{
                                 System.currentTimeMillis());
                             curDegree += geoField.getDeclination();
 
+
+                            if(!DroneManager.isLanded && GPSManager.gpsLoaded){
+                                Double curDegree = Compass.getCurDegree();
+                                //       double currentBearing = droneLocation.getBearing();
+                                double desiredBearing = GPSManager.getDroneLocation().bearingTo(GPSManager.getDogLocation());
+                                double desiredDegree = (curDegree - desiredBearing);
+                                //    System.out.println(desiredDegree);
+                                if(Math.abs(desiredDegree) > 180){
+                                    desiredDegree += desiredDegree > 0 ? -360 : 360;
+                                }
+
+                                if(desiredDegree < 0){
+                                    //   System.out.println("Turn right! " + String.valueOf(Math.min(Math.abs((int)desiredDegree), 50)));
+                                    try {
+                                        DroneManager.turnClockwise(Math.min(Math.abs((int) desiredDegree)/2, 50));
+                                        //           Thread.sleep(50);
+                                        //         DroneManager.forward(1);
+                                    }
+                                    catch (Exception e){
+
+                                    }
+                                }
+                                else if(desiredDegree > 0)
+                                {
+                                    //  System.out.println("Turn left! " + String.valueOf(Math.min(Math.abs(desiredDegree), 50)));
+                                    try{
+                                        DroneManager.turnCounterClockwise(Math.min(Math.abs((int) desiredDegree)/2, 50));
+                                      //  Thread.sleep(50);
+                                      //  DroneManager.forward(1);
+                                    }
+                                    catch (Exception e){
+
+                                    }
+                                }
+                                else
+                                {
+                                    System.out.println("Degree is correct! (hopefully)");
+                                }
+                            }
+                            else
+                            {
+                                try{
+                                    DroneManager.land();
+                                }
+                                catch (Exception e){
+                                    System.out.println("Landing caused an exception!");
+                                }
+                            }
                     }
                 }
             }
